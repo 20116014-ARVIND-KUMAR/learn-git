@@ -25,17 +25,4 @@ public class GlobalExceptionalHandler {
 
         return  new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-
-    @ExceptionHandler
-    public ResponseEntity<Map<String, String>> methodArgNotValidationExceptionHandler(MethodArgumentNotValidException exception){
-
-        Map<String,String> resp= new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach((error -> {
-            String fieldName = ((FieldError)error).getField();
-            String message = error.getDefaultMessage();
-            resp.put(fieldName, message);
-        }));
-
-        return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
-    }
 }
